@@ -1,3 +1,3 @@
 export { default as Home } from "./Home";
 export { default as Orders } from "./Orders";
-export { default as Authorization } from "./Authorization";
+export { default as Authorization } from "../components/AuthorizationModal";
