@@ -1,17 +1,21 @@
-import { Route, Router, Routes } from "react-router-dom";
+import { Route, useLocation, Routes, Navigate } from "react-router-dom";
 import { Authorization, Home, Orders } from "./pages";
 import { Header, NavigationBar } from "./components/shared";
+import { useAuth } from "./context/AuthContext";
 
 function App() {
+	const location = useLocation();
+	const { isAuthenticated } = useAuth();
 	return (
 		<>
 			<Header />
-			<NavigationBar />
-
+			<NavigationBar currentPath={location} />
+			{!isAuthenticated && <Authorization />}
 			<Routes>
-				<Route path="/" element={<Home />} />
+				<Route path="/" element={<Navigate to="/newOrder" replace />} />
+				<Route path="/newOrder" element={<Home />} />
 				<Route path="/orders" element={<Orders />} />
-				<Route path="/auth" element={<Authorization />} />
+				<Route path="*" element={<Navigate to="/newOrder" replace />} />
 			</Routes>
 		</>
 	);
