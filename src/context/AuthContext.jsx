@@ -1,14 +1,36 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { authApi } from "../services";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-	console.log("I am Starting here");
 	const [isAuthenticated, setIsAuthenticated] = useState(
 		!!localStorage.getItem("auth_token")
 	);
 	const [user, setUser] = useState(null);
+
+	useEffect(() => {
+		if (!isAuthenticated) return;
+
+		const controller = new AbortController();
+
+		const fetchData = async () => {
+			try {
+				// Pass the signal to your API helper
+				const response = await authApi.fetchUser({ signal: controller.signal });
+				setUser(response);
+			} catch (error) {
+				if (error.name !== "AbortError") {
+					console.error("Actual fetch error:", error);
+				}
+			}
+		};
+
+		fetchData();
+
+		return () => controller.abort(); // Cancel the request on cleanup
+	}, [isAuthenticated]);
+
 	const login = async (username, password) => {
 		try {
 			const { token, user: userData } = await authApi.login(username, password);

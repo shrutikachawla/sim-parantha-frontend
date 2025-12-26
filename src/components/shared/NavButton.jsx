@@ -12,7 +12,7 @@ export default function NavButton({
 			className={className}
 			style={
 				selected
-					? { color: "#f5f5f5", background: "#343434", borderRadius: "4px" }
+					? { color: "#f5f5f5", background: "#343434", borderRadius: "18px" }
 					: {}
 			}
 		>

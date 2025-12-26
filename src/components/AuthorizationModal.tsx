@@ -1,25 +1,22 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext'; // 1. Import your hook
-import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from './shared/Card';
 import { Input } from './shared';
 import { Button } from './shared/button';
 import { FaRegUserCircle } from "react-icons/fa";
 
 
-interface LoginModalProps {
+interface LoginProps {
   isOpen: boolean;
   onClose: () => void;
-  // onLoginSuccess might no longer be needed if the Context handles the redirect
 }
 
-export const AuthorizationModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
+const AuthorizationModal: React.FC<LoginProps> = ({ isOpen, onClose }) => {
   const { login } = useAuth(); // 2. Get the login function
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,11 +24,9 @@ export const AuthorizationModal: React.FC<LoginModalProps> = ({ isOpen, onClose 
     setError(null);
 
     try {
-      // 3. Use the context login. It handles the API call and localStorage.
-      console.log({username, password})
+      // Use the context login. It handles the API call and localStorage.
       await login(username, password);
       onClose(); 
-      navigate('/newOrder')
     } catch (err: any) {
       // The error comes from your context/apiService
       setError(err.response?.data?.message || 'Invalid credentials');
@@ -40,7 +35,7 @@ export const AuthorizationModal: React.FC<LoginModalProps> = ({ isOpen, onClose 
     }
   };
 
-  // if (!isOpen) return null;
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-[rgba(0,0,0,0.7)] flex items-center justify-center z-50 p-4">
@@ -90,13 +85,6 @@ export const AuthorizationModal: React.FC<LoginModalProps> = ({ isOpen, onClose 
             )}
 
             <div className="flex gap-3 pt-2">
-              {/* <Button
-                type="button"
-                onClick={onClose}
-                className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800"
-              >
-                Cancel
-              </Button> */}
               <Button
                 type="submit"
                 disabled={isLoading}

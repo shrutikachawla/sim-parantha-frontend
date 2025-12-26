@@ -1,7 +1,9 @@
 import { FaSearch, FaUserCircle, FaBell } from "react-icons/fa";
-import headerLogo from "../../assets/sim-paranthas-logo.png";
+import headerLogo from "../assets/sim-paranthas-logo.png";
+import { useAuth } from "../context/AuthContext";
 
 function Header() {
+	const { user } = useAuth();
 	return (
 		<header className="flex justify-between items-centter py-4 px-8 bg-[#1a1a1a]">
 			<div className="flex">
@@ -26,8 +28,7 @@ function Header() {
 				<div className="flex items-center gap-3 cursor-pointer">
 					<FaUserCircle className="text-[#f5f5f5] text-4xl" />
 					<div className="flex flex-col items-start">
-						<h1 className="text-md text-[#ffffff] ">Shrutika</h1>
-						<p className="text-xs text-[#ababab]"> Admin </p>
+						<h1 className="text-md text-[#ffffff] ">{user?.name}</h1>
 					</div>
 				</div>
 			</div>

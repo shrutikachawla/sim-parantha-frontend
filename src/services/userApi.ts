@@ -17,4 +17,8 @@ export const authApi = {
 		const response = await api.post<ApiResponse<null>>("/logout");
 		return response.data;
 	},
+	fetchUser: async (token: string) => {
+		const response = await api.get("/user");
+		return response.data;
+	},
 };

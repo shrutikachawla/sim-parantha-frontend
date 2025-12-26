@@ -3,9 +3,8 @@ import { LuNotebookPen } from "react-icons/lu";
 import { IoStarHalfSharp, IoAnalyticsSharp } from "react-icons/io5";
 import { MdHistory } from "react-icons/md";
 import { TbCalendarDollar } from "react-icons/tb";
-
-import NavButton from "../NavButton";
 import { Link, useLocation } from "react-router-dom";
+import { NavButton } from "./shared";
 
 function NavigationBar() {
 	const iconSize = 18;
@@ -45,7 +44,7 @@ function NavigationBar() {
 	];
 
 	return (
-		<div className="fixed left-0 right-0 bg-[#262626] p-2 h-20 flex justify-around">
+		<div className="fixed left-0 right-0 bg-[#262626] p-2 h-16 flex justify-around">
 			{menuItems.map(({ label, icon, key }, index) => {
 				return (
 					<Link to={"/" + key}>
@@ -53,9 +52,9 @@ function NavigationBar() {
 							key={index}
 							label={label}
 							icon={icon}
-							className="text-[#ababab] w-[170px] h-full flex justify-center items-center px-4 py-2 text-left cursor-[pointer]"
+							className="text-[#ababab] w-[170px] h-full flex justify-center items-center px-4 py-1 text-left cursor-[pointer]"
 							selected={location.pathname == "/" + key}
-							labelStyle={{ fontSize: "14px" }}
+							labelStyle={{ fontSize: "13px" }}
 						/>
 					</Link>
 				);
