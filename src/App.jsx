@@ -14,8 +14,8 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Navigate to="/newOrder" replace />} />
 				<Route path="/newOrder" element={<Home />} />
-				<Route path="/orders" element={<Orders />} />
-				<Route path="*" element={<Navigate to="/newOrder" replace />} />
+				<Route path="/currentOrder" element={<Orders />} />
+				<Route path="/*" element={<Navigate to="/newOrder" replace />} />
 			</Routes>
 		</>
 	);

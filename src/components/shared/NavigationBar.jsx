@@ -5,10 +5,11 @@ import { MdHistory } from "react-icons/md";
 import { TbCalendarDollar } from "react-icons/tb";
 
 import NavButton from "../NavButton";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function NavigationBar() {
 	const iconSize = 18;
+	const location = useLocation();
 
 	const menuItems = [
 		{
@@ -44,7 +45,7 @@ function NavigationBar() {
 	];
 
 	return (
-		<div className="fixed left-0 right-0 bg-[#262626] p-2 h-16 flex justify-around">
+		<div className="fixed left-0 right-0 bg-[#262626] p-2 h-20 flex justify-around">
 			{menuItems.map(({ label, icon, key }, index) => {
 				return (
 					<Link to={"/" + key}>
@@ -52,8 +53,9 @@ function NavigationBar() {
 							key={index}
 							label={label}
 							icon={icon}
-							className="text-[#ababab] w-[170px] flex justify-center items-center px-4 py-2 text-left cursor-[pointer]"
-							selected={false}
+							className="text-[#ababab] w-[170px] h-full flex justify-center items-center px-4 py-2 text-left cursor-[pointer]"
+							selected={location.pathname == "/" + key}
+							labelStyle={{ fontSize: "14px" }}
 						/>
 					</Link>
 				);
