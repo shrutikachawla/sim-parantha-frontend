@@ -11,9 +11,8 @@ import { AuthorizationModal, Header, NavigationBar } from "./components";
 
 function App() {
 	const location = useLocation();
-	const { isAuthenticated, user } = useAuth();
+	const { isAuthenticated } = useAuth();
 	const navigate = useNavigate();
-	console.log({ isAuthenticated, user });
 	return (
 		<>
 			<Header />
@@ -26,12 +25,15 @@ function App() {
 					}}
 				/>
 			)}
-			<Routes>
-				<Route path="/" element={<Navigate to="/newOrder" replace />} />
-				<Route path="/newOrder" element={<Home />} />
-				<Route path="/currentOrder" element={<Orders />} />
-				<Route path="/*" element={<Navigate to="/newOrder" replace />} />
-			</Routes>
+
+			<div className="relative h-[calc(100vh-(var(--spacing)*34))]">
+				<Routes>
+					<Route path="/" element={<Navigate to="/newOrder" replace />} />
+					<Route path="/newOrder" element={<Home />} />
+					<Route path="/currentOrder" element={<Orders />} />
+					<Route path="/*" element={<Navigate to="/newOrder" replace />} />
+				</Routes>
+			</div>
 		</>
 	);
 }

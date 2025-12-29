@@ -10,7 +10,7 @@ function NavigationBar() {
 	const iconSize = 18;
 	const location = useLocation();
 
-	const menuItems = [
+	const navItems = [
 		{
 			key: "newOrder",
 			label: "New Order",
@@ -44,8 +44,8 @@ function NavigationBar() {
 	];
 
 	return (
-		<div className="fixed left-0 right-0 bg-[#262626] p-2 h-16 flex justify-around">
-			{menuItems.map(({ label, icon, key }, index) => {
+		<div className="relative top-0 left-0 right-0 bg-[#262626] p-2 h-16 flex justify-around">
+			{navItems.map(({ label, icon, key }, index) => {
 				return (
 					<Link to={"/" + key}>
 						<NavButton

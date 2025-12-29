@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext";
 function Header() {
 	const { user } = useAuth();
 	return (
-		<header className="flex justify-between items-centter py-4 px-8 bg-[#1a1a1a]">
+		<header className="flex justify-between items-center py-4 px-8 bg-[#1a1a1a] h-18">
 			<div className="flex">
 				<img src={headerLogo} className="h-12 w-20" alt="restro logo" />
 			</div>
